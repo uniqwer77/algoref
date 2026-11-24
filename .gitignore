@@ -1,0 +1,15 @@
+node_modules/
+dist/
+*.log
+*.tsbuildinfo
+.DS_Store
+
+# переменные окружения: в репозитории только .env.example
+.env
+.env.*
+!.env.example
+
+# редакторы
+.idea/
+.vscode/*
+!.vscode/extensions.json
