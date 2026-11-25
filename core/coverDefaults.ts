@@ -22,4 +22,5 @@ export const createCover = (): CoverBlock => ({
     width: 400,
     height: 500 
   },
+  hidden: false
 });

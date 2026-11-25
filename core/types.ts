@@ -4,6 +4,10 @@ export type ElementId = TextId | 'badges' | 'image';
 export interface Offset { x: number; y: number }
 
 export interface Size { width: number; height: number }
+export interface ElementBox {
+  offset?: Offset;
+  size?: Size;
+}
 
 export type Layout = 'split' | 'center';
 export type Theme = 'dark' | 'light';
@@ -27,4 +31,5 @@ export interface CoverBlock {
   offsets: Partial<Record<ElementId, Offset>>;
   sizes: Partial<Record<ElementId, Size>>;
   image: ImageData;
+  hidden: boolean;
 }
