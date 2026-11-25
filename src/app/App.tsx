@@ -1,8 +1,12 @@
-// Временная заглушка: заменяется редактором в следующих задачах.
+import { CoverSection } from '../../core/CoverSection';
+import { createCover } from '../../core/coverDefaults';
+
 export default function App() {
+  const block = createCover();
+
   return (
-    <main style={{ display: 'grid', placeItems: 'center', height: '100%' }}>
-      <h1>Конструктор лендингов</h1>
+    <main>
+      <CoverSection block={block} />
     </main>
   );
 }

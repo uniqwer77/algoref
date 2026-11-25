@@ -1,0 +1,152 @@
+/* Стили блока «Обложка». Общие для редактора и опубликованной страницы. */
+
+.cv-block {
+  position: relative;
+  isolation: isolate;
+  background: var(--bg);
+  color: var(--fg);
+
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+}
+.cv-block[data-theme='dark'] {
+  --bg: #141418;
+  --fg: #ffffff;
+  --muted: #c8c6d2;
+  --accent: #7c3aed;
+  --accent-text: #8d4dff;
+  --ghost-bg: #222227;
+  --ghost-border: #3b3b44;
+  --glow: rgba(124, 58, 237, 0.3);
+  --btn-glow: rgba(124, 58, 237, 0.45);
+}
+.cv-block[data-theme='light'] {
+  --bg: #f5f4fa;
+  --fg: #15141a;
+  --muted: #5a586c;
+  --accent: #7c3aed;
+  --accent-text: #6d28d9;
+  --ghost-bg: #ffffff;
+  --ghost-border: #d9d7e6;
+  --glow: rgba(124, 58, 237, 0.14);
+  --btn-glow: rgba(124, 58, 237, 0.3);
+}
+.cv-block::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(60% 80% at 85% 0%, var(--glow), transparent 70%);
+}
+.cv-block[data-spacing='compact'] { --pad: 48px; }
+.cv-block[data-spacing='normal'] { --pad: 84px; }
+.cv-block[data-spacing='spacious'] { --pad: 120px; }
+
+.cv-inner {
+  display: grid;
+  gap: 48px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: var(--pad) 146px;
+}
+.cv-block[data-layout='split'][data-image='true'] .cv-inner {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+}
+.cv-block[data-layout='center'] .cv-inner { justify-items: center; }
+
+.cv-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+  min-width: 0;
+}
+.cv-block[data-layout='center'] .cv-col {
+  align-items: center;
+  text-align: center;
+}
+
+.cv-eyebrow { display: flex; align-items: center; gap: 8px; color: var(--accent-text); }
+.cv-eyebrow-text {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cv-title {
+  max-width: 560px;
+  font-size: 56px;
+  line-height: 59px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+.cv-block[data-layout='center'] .cv-title { max-width: 780px; }
+
+.cv-subtitle {
+  max-width: 560px;
+  font-size: 20px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.cv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 26px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.cv-btn-text { font-size: 16px; }
+.cv-primary { background: var(--accent); color: #fff; box-shadow: 0 0 32px var(--btn-glow); }
+.cv-ghost { background: var(--ghost-bg); border: 1px solid var(--ghost-border); color: var(--fg); }
+
+.cv-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.cv-badges li { display: flex; align-items: center; gap: 8px; }
+.cv-badges li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* Текст из Tiptap приходит в <p>: убираем отступы браузера, как в редакторе */
+.cv-block p { margin: 0; }
+
+.cv-image-box {
+  max-width: 100%;
+  border: 1px solid var(--ghost-border);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.cv-image-box img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cv-block[data-layout='center'] .cv-image-box { margin: 0 auto; }
+
+@media (max-width: 800px) {
+  .cv-inner { padding-inline: 20px; }
+  .cv-block[data-layout='split'][data-image='true'] .cv-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
