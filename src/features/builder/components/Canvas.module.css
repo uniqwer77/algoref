@@ -1,0 +1,5 @@
+.empty { display: grid; place-items: center; height: 100%; }
+.empty button {
+  padding: 14px 22px; border: 0; border-radius: 12px; background: #7c3aed; color: #fff;
+  font-weight: 700; cursor: pointer;
+}

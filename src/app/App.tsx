@@ -1,13 +1,10 @@
 import { useEffect } from 'react';
 import { Canvas } from '../features/builder/components/Canvas';
+import { TopBar } from '../features/builder/components/TopBar';
 import { useBuilderStore } from '../features/builder/store/builderStore';
 import styles from './App.module.css';
 
 export default function App() {
-  const preview = useBuilderStore((s) => s.preview);
-
-  // Ctrl/Cmd+Z — назад, Ctrl/Cmd+Shift+Z или Ctrl+Y — вперёд.
-  // e.code, а не e.key — чтобы работало и в русской раскладке.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (!(e.ctrlKey || e.metaKey) || e.altKey) return;
@@ -23,7 +20,8 @@ export default function App() {
 
   return (
     <div className={styles.app}>
-      <div className={styles.body} data-preview={preview}>
+      <TopBar />
+      <div className={styles.body}>
         <main className={styles.stage}>
           <Canvas />
         </main>

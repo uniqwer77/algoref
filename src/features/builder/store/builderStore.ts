@@ -22,6 +22,7 @@ interface BuilderState {
   updateContent: (id: string, key: TextId, html: string) => void;
   setElementBox: (id: string, el: ElementId, box: ElementBox) => void;
   moveBlock: (id: string, dir: -1 | 1) => void;
+  moveElement: (id: string, el: ElementId, delta: Offset) => void;
   duplicateBlock: (id: string) => void;
   removeBlock: (id: string) => void;
   toggleBlockHidden: (id: string) => void;
@@ -131,6 +132,17 @@ export const useBuilderStore = create<BuilderState>()((set) => ({
       [next[i], next[j]] = [next[j], next[i]];
       return commit(s, next);
     }),
+
+    moveElement: (id, el, delta) =>
+    set((s) =>
+      commit(
+        s,
+        patchBlock(s.blocks, id, (b) => {
+          const cur = b.offsets[el] ?? { x: 0, y: 0 };
+          return { ...b, offsets: { ...b.offsets, [el]: { x: cur.x + delta.x, y: cur.y + delta.y } } };
+        }),
+      ),
+    ),
 
   duplicateBlock: (id) =>
     set((s) => {

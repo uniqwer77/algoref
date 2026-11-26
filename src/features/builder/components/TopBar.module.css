@@ -1,0 +1,16 @@
+.bar {
+  display: flex; align-items: center; gap: 16px; height: 52px; padding: 0 16px;
+  background: #fff; border-bottom: 1px solid #dcdae6;
+}
+.brand { font-size: 14px; font-weight: 800; color: #15141a; }
+.group { display: flex; gap: 4px; padding-left: 16px; border-left: 1px solid #e2e0ec; }
+.bar button {
+  display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px;
+  border: 0; border-radius: 8px; background: transparent;
+  font-size: 13px; font-weight: 700; color: #3a3850; cursor: pointer;
+}
+.bar button:hover:not(:disabled) { background: #f0eef8; }
+.bar button:disabled { opacity: 0.35; cursor: default; }
+.spacer { flex: 1; }
+.bar .primary { background: #15141a; color: #fff; }
+.bar .primary:hover:not(:disabled) { background: #2a2933; }

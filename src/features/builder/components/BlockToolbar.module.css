@@ -1,0 +1,16 @@
+.toolbar {
+  position: absolute; top: 10px; left: 24px; z-index: 40;
+  display: flex; align-items: center; gap: 2px; padding: 6px 8px;
+  border-radius: 12px; background: #fff; color: #15141a;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  font-size: 13px; font-weight: 600; line-height: 1; text-align: left; cursor: default;
+}
+.title { display: flex; align-items: center; gap: 6px; padding: 0 6px; font-weight: 800; color: #4b3fd1; }
+.sep { width: 1px; height: 18px; margin: 0 4px; background: #e2e0ec; }
+.toolbar button {
+  display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 7px;
+  border: 0; border-radius: 6px; background: transparent; color: inherit; cursor: pointer; font-weight: 600;
+}
+.toolbar button:hover:not(:disabled) { background: #f0eef8; }
+.toolbar button:disabled { opacity: 0.35; cursor: default; }
+.variant { color: #55536a; }
