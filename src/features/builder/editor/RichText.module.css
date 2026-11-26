@@ -1,0 +1,4 @@
+.root { position: relative; display: block; outline: 1px solid transparent; outline-offset: 4px; user-select: none; }
+.root :global(.ProseMirror) { outline: none; min-width: 1ch; }
+.root :global(.ProseMirror p) { margin: 0; }
+.editing { outline-color: #5b5bd6; cursor: text; user-select: text; z-index: 30; }

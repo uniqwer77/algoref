@@ -1,0 +1,19 @@
+.toolbar {
+  position: absolute; top: calc(100% + 10px); left: 0; z-index: 50;
+  display: flex; align-items: center; gap: 4px; width: max-content;
+  padding: 6px; border-radius: 10px; border: 1px solid #34343c; background: #1b1b20;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  color: #e8e8ee; font-size: 12px; font-weight: 700; line-height: 1;
+  letter-spacing: 0; text-transform: none; text-align: left; cursor: default; user-select: none;
+}
+.toolbar button {
+  display: grid; place-items: center; width: 28px; height: 28px; padding: 0;
+  border: 0; border-radius: 6px; background: transparent; color: inherit; cursor: pointer;
+}
+.toolbar button:hover { background: #2c2c34; }
+.toolbar .on { background: #3d3d48; }
+.size { min-width: 24px; text-align: center; }
+.sep { width: 1px; height: 18px; background: #3a3a44; margin: 0 4px; }
+.toolbar .swatch { width: 18px; height: 18px; border-radius: 50%; border: 1px solid #5a5a66; margin: 0 2px; }
+.toolbar .swatch.on { outline: 2px solid #8d4dff; outline-offset: 1px; background-clip: padding-box; }
+.picker { width: 22px; height: 22px; padding: 0; border: 0; border-radius: 50%; background: none; cursor: pointer; }
