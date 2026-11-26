@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import type { CoverBlock, ElementBox, ElementId, Offset, Size, TextId } from '../../../../core/types';
-import { createCover } from '../../../../core/coverDefaults';
+import type { BlockType } from '../sidebar/catalog';
+import { createBlock } from '../../../../core/coverDefaults';
 import { pushHistory, redoHistory, resetCoalescing, undoHistory } from './history';
 
 type BlockPatch = Partial<Omit<CoverBlock, 'id' | 'type'>>;
@@ -17,11 +18,12 @@ interface BuilderState {
   loadLanding: (blocks: CoverBlock[]) => void;
   undo: () => void;
   redo: () => void;
-  addCover: () => void;
+  addBlock: (type: BlockType, index?: number) => void;
   updateBlock: (id: string, patch: BlockPatch, coalesceKey?: string) => void;
   updateContent: (id: string, key: TextId, html: string) => void;
   setElementBox: (id: string, el: ElementId, box: ElementBox) => void;
   moveBlock: (id: string, dir: -1 | 1) => void;
+  moveBlockTo: (id: string, to: number) => void;
   moveElement: (id: string, el: ElementId, delta: Offset) => void;
   duplicateBlock: (id: string) => void;
   removeBlock: (id: string) => void;
@@ -46,7 +48,7 @@ function commit(
 const validSelection = (blocks: CoverBlock[], id: string | null) =>
   id && blocks.some((b) => b.id === id) ? id : (blocks[0]?.id ?? null);
 
-const initial = createCover();
+const initial = createBlock('cover');
 
 export const useBuilderStore = create<BuilderState>()((set) => ({
   blocks: [initial],
@@ -85,11 +87,13 @@ export const useBuilderStore = create<BuilderState>()((set) => ({
       };
     }),
 
-  addCover: () =>
-    set((s) => {
-      const b = createCover();
-      return commit(s, [...s.blocks, b], { selectedBlockId: b.id });
-    }),
+    addBlock: (type, index) =>
+      set((s) => {
+        const block = createBlock(type);
+        const at = Math.min(index ?? s.blocks.length, s.blocks.length);
+        const next = [...s.blocks.slice(0, at), block, ...s.blocks.slice(at)];
+        return { ...commit(s, next), selectedBlockId: block.id };
+      }),
 
   updateBlock: (id, patch, coalesceKey) =>
     set((s) => commit(s, patchBlock(s.blocks, id, (b) => ({ ...b, ...patch })), {}, coalesceKey)),
@@ -132,6 +136,18 @@ export const useBuilderStore = create<BuilderState>()((set) => ({
       [next[i], next[j]] = [next[j], next[i]];
       return commit(s, next);
     }),
+
+    moveBlockTo: (id, to) =>
+      set((s) => {
+        const from = s.blocks.findIndex((b) => b.id === id);
+        if (from < 0) return s;
+        const target = to > from ? to - 1 : to;
+        if (target === from) return s;
+        const next = [...s.blocks];
+        const [item] = next.splice(from, 1);
+        next.splice(target, 0, item);
+        return commit(s, next);
+      }),
 
     moveElement: (id, el, delta) =>
     set((s) =>

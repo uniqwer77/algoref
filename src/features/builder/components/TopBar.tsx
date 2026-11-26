@@ -5,7 +5,7 @@ import styles from './TopBar.module.css';
 export function TopBar() {
   const canUndo = useBuilderStore((s) => s.past.length > 0);
   const canRedo = useBuilderStore((s) => s.future.length > 0);
-  const { undo, redo, addCover } = useBuilderStore.getState();
+  const { undo, redo, addBlock } = useBuilderStore.getState();
 
   return (
     <header
@@ -24,7 +24,7 @@ export function TopBar() {
       </div>
 
       <div className={styles.group}>
-        <button onClick={addCover}>
+        <button onClick={() => addBlock('cover')}>
           <Plus size={16} /> Добавить блок «Обложка»
         </button>
       </div>

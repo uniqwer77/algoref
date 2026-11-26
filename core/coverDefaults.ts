@@ -1,3 +1,4 @@
+import type { BlockType } from '../src/features/builder/sidebar/catalog';
 import type { CoverBlock } from './types';
 
 export const createCover = (): CoverBlock => ({
@@ -24,3 +25,12 @@ export const createCover = (): CoverBlock => ({
   },
   hidden: false
 });
+
+export function createBlock(type: BlockType): CoverBlock {
+  switch (type) {
+    case 'cover':
+      return createCover();
+    default:
+      return createCover();
+  }
+}
