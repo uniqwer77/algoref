@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowLeftRight, ArrowUp, Copy,  GraduationCap, Trash2 } from 'lucide-react';
+import { ArrowDown, ArrowLeftRight, ArrowUp, Copy,  GraduationCap, Trash2, Eye, EyeOff  } from 'lucide-react';
 import { useBuilderStore } from '../store/builderStore';
 import { COVER_PRESETS, findPreset } from '../blocks/cover/presets';
 import type { CoverBlock } from '../../../../core/types';
@@ -7,7 +7,7 @@ import styles from './BlockToolbar.module.css';
 interface Props { block: CoverBlock; index: number; total: number }
 
 export function BlockToolbar({ block, index, total }: Props) {
-  const { updateBlock, moveBlock, duplicateBlock, removeBlock } =
+  const { updateBlock, moveBlock, duplicateBlock, toggleBlockHidden, removeBlock } =
     useBuilderStore.getState();
 
   const preset = findPreset(block);
@@ -31,6 +31,13 @@ export function BlockToolbar({ block, index, total }: Props) {
         <ArrowLeftRight size={15} /> {preset.label}
       </button>
       <button title="Дублировать" onClick={() => duplicateBlock(block.id)}><Copy size={15} /></button>
+      <button
+        title={block.hidden ? 'Показать' : 'Скрыть'}
+        data-active={block.hidden ? 'true' : undefined}
+        onClick={() => toggleBlockHidden(block.id)}
+      >
+        {block.hidden ? <EyeOff size={15} /> : <Eye size={15} />}
+      </button>
       <button title="Удалить" onClick={() => removeBlock(block.id)}><Trash2 size={15} /></button>
     </div>
   );

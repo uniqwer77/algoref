@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { useBuilderStore } from '../../store/builderStore';
 import { ResizableElement } from '../../components/ResizableElement';
+import { BlockToolbar } from '../../components/BlockToolbar';
 import { RichText } from '../../editor/RichText';
 import { CoverSection } from '../../../../../core/CoverSection';
 import type { CoverBlock, ElementId, Size, TextId } from '../../../../../core/types';
@@ -24,7 +25,7 @@ const MIN_SIZE: Record<ElementId, Size> = {
 
 interface Props { block: CoverBlock; index: number; total: number }
 
-export function CoverBlockView({ block}: Props) {
+export function CoverBlockView({ block, index, total }: Props) {
   const selected = useBuilderStore((s) => s.selectedBlockId === block.id);
   const preview = useBuilderStore((s) => s.preview);
   const selectBlock = useBuilderStore((s) => s.selectBlock);
@@ -73,6 +74,7 @@ export function CoverBlockView({ block}: Props) {
     <div data-selected={selected && interactive} onPointerDown={() => selectBlock(block.id)}>
       <CoverSection
         block={block}
+        toolbar={selected && interactive && <BlockToolbar block={block} index={index} total={total} />}
         renderElement={renderElement}
         renderText={renderText}
       />

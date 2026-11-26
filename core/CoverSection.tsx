@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react';
-import { ArrowRight, PenTool } from 'lucide-react';
+import type { ReactNode  } from 'react';
+import { ArrowRight, PenTool, EyeOff } from 'lucide-react';
 import type { CoverBlock, ElementId, TextId } from './types';
 import { cx } from './cx';
 import './cover.css';
@@ -50,11 +50,18 @@ export function CoverSection({ block, renderText, renderElement, renderImage, to
       className='cv-block'
       data-block-id={block.id}
       data-theme={block.theme}
+      data-hidden={block.hidden ? 'true' : undefined}
       data-layout={block.layout}
       data-spacing={block.spacing}
       data-image={block.showImage}
     >
       {toolbar}
+      {block.hidden && (
+        <div className='cv-hidden-badge'>
+          <EyeOff size={14} />
+          Скрыт
+        </div>
+      )}
 
       <div className='cv-inner'>
         <div className='cv-col'>

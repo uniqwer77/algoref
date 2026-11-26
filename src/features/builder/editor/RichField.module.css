@@ -1,0 +1,8 @@
+.field {
+  padding: 10px 12px; border: 1px solid #dcdae6; border-radius: 10px; background: #fff;
+  font-size: 14px; line-height: 1.45; color: #15141a;
+}
+.field:focus-within { border-color: #7c3aed; box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15); }
+.field :global(.ProseMirror) { outline: none; max-height: 120px; overflow-y: auto; }
+.field :global(.ProseMirror p) { margin: 0; } 
+.field :global(.ProseMirror span[style]) { font-size: inherit !important; color: inherit !important; } 

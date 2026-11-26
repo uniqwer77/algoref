@@ -1,9 +1,18 @@
 /* Стили блока «Обложка». Общие для редактора и опубликованной страницы. */
 
-.cv-block {
+/* .cv-block {
   position: relative;
   isolation: isolate;
   background: var(--bg);
+  color: var(--fg);
+
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+} */
+.cv-block {
+  position: relative;
+  isolation: isolate;
   color: var(--fg);
 
   width: 100%;
@@ -32,12 +41,21 @@
   --glow: rgba(124, 58, 237, 0.14);
   --btn-glow: rgba(124, 58, 237, 0.3);
 }
-.cv-block::before {
+/* .cv-block::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
   background: radial-gradient(60% 80% at 85% 0%, var(--glow), transparent 70%);
+} */
+.cv-block::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60% 80% at 85% 0%, var(--glow), transparent 70%),
+    var(--bg);
 }
 .cv-block[data-spacing='compact'] { --pad: 48px; }
 .cv-block[data-spacing='normal'] { --pad: 84px; }
@@ -144,6 +162,31 @@
   object-fit: cover;
 }
 .cv-block[data-layout='center'] .cv-image-box { margin: 0 auto; }
+
+.cv-block[data-hidden='true']::before,
+.cv-block[data-hidden='true'] .cv-inner {
+  opacity: 0.35;
+  filter: grayscale(1);
+  transition: opacity 0.2s;
+}
+
+.cv-hidden-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #fff;
+  color: #5a586c;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  pointer-events: none;
+}
 
 @media (max-width: 800px) {
   .cv-inner { padding-inline: 20px; }
