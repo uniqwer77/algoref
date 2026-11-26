@@ -39,7 +39,6 @@ import { DndContext, PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
 import type { DragEndEvent } from '@dnd-kit/core';
 import { useBuilderStore } from '../store/builderStore';
 import { CoverBlockView } from '../blocks/cover/CoverBlockView';
-import { Sidebar } from '../sidebar/Sidebar';
 import { DropSlot } from './DropSlot';
 import type { ElementId } from '../../../../core/types';
 import styles from './Canvas.module.css';
@@ -56,28 +55,48 @@ export function Canvas() {
     moveElement(blockId, el as ElementId, { x: delta.x, y: delta.y });
   };
 
+  if (blocks.length === 0) {
   return (
-    <div className={styles.editor}>
-      <Sidebar />
-
-      <main className={styles.canvas}>
-        {blocks.length === 0 ? (
-          <div className={styles.empty}>
-            <DropSlot index={0} />
-            <button onClick={() => addBlock('cover')}>Добавить блок «Обложка»</button>
-          </div>
-        ) : (
-          <DndContext sensors={sensors} onDragEnd={onDragEnd}>
-            {blocks.map((block, i) => (
-              <Fragment key={block.id}>
-                <DropSlot index={i} />
-                <CoverBlockView block={block} index={i} total={blocks.length} />
-              </Fragment>
-            ))}
-            <DropSlot index={blocks.length} />
-          </DndContext>
-        )}
-      </main>
+    <div className={styles.empty}>
+      <DropSlot index={0} />
+      <button onClick={() => addBlock('cover')}>Добавить блок «Обложка»</button>
     </div>
   );
+}
+
+return (
+  <DndContext sensors={sensors} onDragEnd={onDragEnd}>
+    {blocks.map((block, i) => (
+      <Fragment key={block.id}>
+        <DropSlot index={i} />
+        <CoverBlockView block={block} index={i} total={blocks.length} />
+      </Fragment>
+    ))}
+    <DropSlot index={blocks.length} />
+  </DndContext>
+);
+  // return (
+  //   <div className={styles.editor}>
+  //     <Sidebar />
+
+  //     <main className={styles.canvas}>
+  //       {blocks.length === 0 ? (
+  //         <div className={styles.empty}>
+  //           <DropSlot index={0} />
+  //           <button onClick={() => addBlock('cover')}>Добавить блок «Обложка»</button>
+  //         </div>
+  //       ) : (
+  //         <DndContext sensors={sensors} onDragEnd={onDragEnd}>
+  //           {blocks.map((block, i) => (
+  //             <Fragment key={block.id}>
+  //               <DropSlot index={i} />
+  //               <CoverBlockView block={block} index={i} total={blocks.length} />
+  //             </Fragment>
+  //           ))}
+  //           <DropSlot index={blocks.length} />
+  //         </DndContext>
+  //       )}
+  //     </main>
+  //   </div>
+  // );
 }

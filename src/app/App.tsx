@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Canvas } from '../features/builder/components/Canvas';
 import { TopBar } from '../features/builder/components/TopBar';
 import { CoverSettingsPanel } from '../features/builder/blocks/cover/CoverSettingsPanel';
+import { Sidebar } from '../features/builder/sidebar/Sidebar';
 import { useBuilderStore } from '../features/builder/store/builderStore';
 import styles from './App.module.css';
 
@@ -23,6 +24,7 @@ export default function App() {
     <div className={styles.app}>
       <TopBar />
       <div className={styles.body}>
+        <Sidebar />
         <main className={styles.stage}>
           <Canvas />
         </main>
