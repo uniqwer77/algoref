@@ -1,5 +1,11 @@
 *, *::before, *::after { box-sizing: border-box; }
-html, body, #root { height: 100%; margin: 0; }
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* страница больше не скроллится целиком */
+}
 body {
   font-family: 'Manrope', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -7,3 +13,30 @@ body {
   color: #15141a;
 }
 button, input { font: inherit; }
+/* Firefox: стандартные свойства */
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(120, 118, 140, 0.25) transparent;
+  }
+}
+
+/* Chrome, Edge, Safari: псевдоэлементы */
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(120, 118, 140, 0.25);
+  border-radius: 999px;
+  transition: background-color 0.3s;
+}
+*:hover::-webkit-scrollbar-thumb {
+  background: rgba(120, 118, 140, 0.55);
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 118, 140, 0.8);
+}

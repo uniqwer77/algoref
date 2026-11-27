@@ -1,7 +1,13 @@
 .app { display: flex; flex-direction: column; height: 100dvh; }
-.body {
+/* .body {
   flex: 1; min-height: 0;
   display: grid; grid-template-columns: minmax(0, 1fr) 320px;
+} */
+.body {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr) auto;
+  flex: 1;
+  min-height: 0;
 }
 .body[data-preview='true'] { grid-template-columns: minmax(0, 1fr); }
 .stage { overflow: auto; padding: 14px; background: #e6e6ec; }
